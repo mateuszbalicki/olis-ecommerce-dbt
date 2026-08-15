@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    database: OLIST_ECOMMERCE
+    schema: RAW
+    description: "Raw data from brazzilian e-commerce Olist ingested into Snowflake"
+    tables:
+      - name: customers
+        identifier: RAW_CUSTOMERS
+      - name: geolocation
+        identifier: RAW_GEOLOCATION
+      - name: order_items
+        identifier: RAW_ORDER_ITEMS
+      - name: order_payments
+        identifier: RAW_ORDER_PAYMENTS
+      - name: order_reviews
+        identifier: RAW_ORDER_REVIEWS
+      - name: orders
+        identifier: RAW_ORDERS
+      - name: products
+        identifier: RAW_PRODUCTS
+      - name: sellers
+        identifier: RAW_SELLERS
+      - name: product_category_name_translation
+        identifier: RAW_PRODUCT_CATEGORY_NAME_TRANSLATION
