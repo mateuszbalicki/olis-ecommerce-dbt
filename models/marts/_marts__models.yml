@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    columns:
+      - name: product_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_sellers
+    columns:
+      - name: seller_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_orders
+    description: "Main e-commerce fact table. Contains orders enriched with the total payment value and transactions count."
+    columns:
+      - name: order_id
+        description: "Unique identifier of the order (Primary Key)."
+        tests:
+          - unique
+          - not_null
+      
+      - name: customer_id
+        description: "Foreign key linking to the dim_customers table."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      
+      - name: order_status
+        description: "Current status of the order (e.g., delivered, shipped, canceled)."
+        tests:
+          - accepted_values:
+              arguments:  
+                values: ['delivered', 'shipped', 'canceled', 'unavailable', 'invoiced', 'processing', 'approved', 'created']
+      
+      - name: total_payment_value
+        description: "Sum of all payments made for a given order. A value of 0 indicates no registered payment."
