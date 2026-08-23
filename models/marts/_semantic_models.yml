@@ -1,0 +1,28 @@
+semantic_models:
+  - name: semantic_orders
+    description: "Semantic model for orders fact table."
+    model: ref('fct_orders')
+
+    entities:
+      - name: order_id
+        type: primary
+      - name: customer_id
+        type: foreign
+
+    dimensions:
+      - name: order_status
+        type: categorical
+
+    measures:
+      - name: total_payment_amount
+        description: "Sum of all payments per order"
+        agg: sum
+        exprt: total_payment_amount
+
+    metrics:
+      - name: total_revenue
+        description: "Total revenue from all sold orders"
+        type: simple 
+        label: "Total Revenue"
+        type_params:
+          measure: total_payment_amount
